@@ -42,7 +42,7 @@ function calculateCosts(months: number, pm: boolean) {
 
 export default function PrototypeSectionChart({ months, pm }: Props) {
   const chartRef = useRef<HTMLCanvasElement>(null);
-  const chartInstance = useRef<any>(null);
+  const chartInstance = useRef<Chart | null>(null);
   const costs = calculateCosts(months, pm);
 
   useEffect(() => {

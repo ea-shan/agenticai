@@ -30,7 +30,7 @@ export default function WorkflowSection() {
   return (
     <section id="workflow" className="py-20 bg-white">
       <h2 className="text-3xl md:text-4xl font-bold text-center section-title mb-4 text-black">Interactive Workflow Example</h2>
-      <p className="text-lg text-black text-center max-w-3xl mx-auto mb-12">See how the agent works in a real-world scenario for generating SaaS B2B leads. Click each step to see the details of the 'Observe, Plan, Act, Reflect' cycle in action.</p>
+      <p className="text-lg text-black text-center max-w-3xl mx-auto mb-12">See how the agent works in a real-world scenario for generating SaaS B2B leads. Click each step to see the details of the &apos;Observe, Plan, Act, Reflect&apos; cycle in action.</p>
       <div className="max-w-3xl mx-auto space-y-4">
         {steps.map((step, idx) => (
           <div

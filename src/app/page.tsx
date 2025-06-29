@@ -7,6 +7,7 @@ import InvestmentSection from "@/components/InvestmentSection";
 import LLMModalProvider from "@/components/LLMModalProvider";
 import MoveToTopButton from "@/components/MoveToTopButton";
 
+
 export default function Home() {
   return (
     <LLMModalProvider>

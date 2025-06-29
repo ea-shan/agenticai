@@ -10,23 +10,29 @@ interface ModalState {
   content: string;
 }
 
-const LLMModalContext = createContext<any>(null);
+interface LLMModalContextType {
+  openModal: ({ title, prompt }: { title: string; prompt: string }) => Promise<void>;
+}
+
+const LLMModalContext = createContext<LLMModalContextType | undefined>(undefined);
 
 export function useLLMModal() {
-  return useContext(LLMModalContext);
+  const context = useContext(LLMModalContext);
+  if (!context) throw new Error('useLLMModal must be used within an LLMModalProvider');
+  return context;
 }
 
 // Enhanced markdown-like parser for headings, bold, italics, and links
 function formatLLMContent(text: string) {
   // Split by double newlines for paragraphs
   const paragraphs = text.split(/\n{2,}/).filter(Boolean);
-  return paragraphs.map((para, i) => {
+  return paragraphs.map((para: string, i: number) => {
     // Headings
     if (/^### /.test(para)) return <h3 key={i} className="text-lg font-bold mt-4 mb-2">{para.replace(/^### /, "")}</h3>;
     if (/^## /.test(para)) return <h2 key={i} className="text-xl font-bold mt-6 mb-2">{para.replace(/^## /, "")}</h2>;
     if (/^# /.test(para)) return <h1 key={i} className="text-2xl font-bold mt-8 mb-3">{para.replace(/^# /, "")}</h1>;
     // Inline formatting: bold (**text**), italics (*text*), links
-    let formatted = para
+    const formatted = para
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
       .replace(/\*([^*]+)\*/g, '<em>$1</em>')
       .replace(/(https?:\/\/[^\s]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer" class="text-purple-700 underline">$1</a>');
@@ -59,8 +65,12 @@ export default function LLMModalProvider({ children }: { children: ReactNode }) 
         text = "Error: Could not get a response from the AI. Please try again.";
       }
       setModal((m) => ({ ...m, loading: false, content: text }));
-    } catch (error: any) {
-      setModal((m) => ({ ...m, loading: false, content: `Error: ${error.message}` }));
+    } catch (error: unknown) {
+      let message = 'Unknown error';
+      if (typeof error === 'object' && error !== null && 'message' in error && typeof (error as { message?: unknown }).message === 'string') {
+        message = (error as { message: string }).message;
+      }
+      setModal((m) => ({ ...m, loading: false, content: `Error: ${message}` }));
     }
   };
 

@@ -31,11 +31,11 @@ export default function PrototypeSection() {
   return (
     <section id="prototype" className="py-20 bg-white">
       <h2 className="text-3xl md:text-4xl font-bold text-center section-title mb-4 text-black">Prototype Plan & Costs</h2>
-      <p className="text-lg text-black text-center max-w-3xl mx-auto mb-12">Our high-feasibility plan leverages our existing strengths to deliver a working prototype in 4-6 months. Explore the development timeline and interact with the cost model below, seeing how we'll demonstrate the core agentic loop. Click "Explain Phase ✨" for an AI-powered deep dive into each stage.</p>
+      <p className="text-lg text-black text-center max-w-3xl mx-auto mb-12">Our high-feasibility plan leverages our existing strengths to deliver a working prototype in 4-6 months. Explore the development timeline and interact with the cost model below, seeing how we&apos;ll demonstrate the core agentic loop. Click &quot;Explain Phase ✨&quot; for an AI-powered deep dive into each stage.</p>
       <div className="my-16">
         <h3 className="text-2xl font-bold text-center mb-8 text-black">Development Timeline</h3>
         <div className="relative max-w-4xl mx-auto border-l-2 border-purple-300 pl-8 py-4">
-          {phases.map((phase, idx) => (
+          {phases.map((phase) => (
             <div key={phase.title} className="timeline-item mb-12 relative pr-4">
               <h4 className="font-bold text-xl text-black">{phase.title}</h4>
               <p className="font-medium text-black">Months: {phase.months}</p>
@@ -46,7 +46,7 @@ export default function PrototypeSection() {
                 className="mt-4 bg-purple-600 text-white py-1 px-3 rounded-md hover:bg-purple-700 flex items-center gap-2 text-black"
                 onClick={() => openModal({
                   title: `Deep Dive: ${phase.title}`,
-                  prompt: `Explain the following prototype phase in more detail, focusing on its significance and expected outcomes for an agentic AI marketing solution: \"${phase.title}. ${phase.details}\".`
+                  prompt: `Explain the following prototype phase in more detail, focusing on its significance and expected outcomes for an agentic AI marketing solution: &quot;${phase.title}. ${phase.details}&quot;.`
                 })}
               >
                 <SparklesIcon className="w-5 h-5 text-black" /> Explain Phase ✨

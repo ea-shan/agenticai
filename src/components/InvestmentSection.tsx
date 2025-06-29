@@ -43,7 +43,7 @@ export default function InvestmentSection() {
   return (
     <section id="investment" className="py-20 text-center bg-white">
       <h2 className="text-3xl md:text-4xl font-bold section-title mb-4 text-black">Why Invest In Us?</h2>
-      <p className="text-lg text-stone-600 text-center max-w-3xl mx-auto mb-12">Our agentic AI solution represents the future of marketing, delivering unparalleled efficiency and growth. Click "Draft Pitch Summary ✨" for an AI-generated concise overview of our value proposition.</p>
+      <p className="text-lg text-stone-600 text-center max-w-3xl mx-auto mb-12">Our agentic AI solution represents the future of marketing, delivering unparalleled efficiency and growth. Click &quot;Draft Pitch Summary &quot; for an AI-generated concise overview of our value proposition.</p>
       <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-12">
         {cards.map((c) => (
           <div key={c.title} className="card bg-white p-6 rounded-xl shadow flex flex-col items-center hover:shadow-lg transition-transform">

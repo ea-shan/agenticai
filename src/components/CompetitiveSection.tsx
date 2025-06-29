@@ -34,7 +34,7 @@ export default function CompetitiveSection() {
   return (
     <section id="competitive" className="py-20 bg-white">
       <h2 className="text-3xl md:text-4xl font-bold text-center section-title mb-4 text-black">Competitive Landscape</h2>
-      <p className="text-lg text-stone-600 text-center max-w-3xl mx-auto mb-12">We've analyzed leading AI marketing platforms and specialized tools. While many automate parts, our solution aims for true, end-to-end agentic autonomy. Click "Generate Insight ✨" for an AI-powered overview of each competitor.</p>
+      <p className="text-lg text-stone-600 text-center max-w-3xl mx-auto mb-12">We&apos;ve analyzed leading AI marketing platforms and specialized tools. While many automate parts, our solution aims for true, end-to-end agentic autonomy. Click &quot;Generate Insight ✨&quot; for an AI-powered overview of each competitor.</p>
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {competitors.map((c) => (
           <div key={c.name} className="card bg-white p-6 rounded-xl shadow flex flex-col justify-between hover:shadow-lg transition-transform">
@@ -54,7 +54,7 @@ export default function CompetitiveSection() {
           </div>
         ))}
       </div>
-      <p className="text-lg text-stone-600 max-w-3xl mx-auto mt-8">While these tools offer significant automation, our vision is a solution that fully integrates the 'observe, plan, act, reflect' loop for true self-optimization, going beyond siloed functionalities.</p>
+      <p className="text-lg text-stone-600 max-w-3xl mx-auto mt-8">While these tools offer significant automation, our vision is a solution that fully integrates the &apos;observe, plan, act, reflect&apos; loop for true self-optimization, going beyond siloed functionalities.</p>
     </section>
   );
 }

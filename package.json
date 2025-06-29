@@ -11,6 +11,7 @@
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "chart.js": "^4.5.0",
+    "framer-motion": "^12.19.2",
     "jspdf": "^3.0.1",
     "next": "15.3.4",
     "react": "^19.0.0",
