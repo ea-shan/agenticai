@@ -49,19 +49,19 @@ export default function ModelSection() {
   const tabCount = tabData.length;
   const contentRef = useRef<HTMLDivElement>(null);
   return (
-    <section id="model" className="py-20">
+    <section id="model" className="py-10 md:py-20 px-2 sm:px-4 bg-white w-full overflow-x-hidden">
       <h2 className="text-3xl md:text-4xl font-bold text-center section-title mb-4 text-black">The Agentic Model: Deep Dive</h2>
-      <p className="text-lg text-stone-600 text-center max-w-3xl mx-auto mb-12">Our model is comprised of four interconnected components that form a continuous loop of learning and optimization. Explore each component to understand its detailed role and the technologies involved.</p>
+      <p className="text-base sm:text-lg text-stone-600 text-center max-w-3xl mx-auto mb-12 px-2">Our model is comprised of four interconnected components that form a continuous loop of learning and optimization. Explore each component to understand its detailed role and the technologies involved.</p>
       <div className="max-w-5xl mx-auto">
         {/* Mobile: horizontally scrollable tabs */}
-        <div className="overflow-x-auto whitespace-nowrap -mx-4 px-4 border-b border-stone-300 mb-8 scrollbar-hide md:hidden">
+        <div className="overflow-x-auto whitespace-nowrap -mx-2 px-2 border-b border-stone-300 mb-8 scrollbar-hide md:hidden">
           {tabData.map((tab, idx) => (
             <button
               key={tab.label}
-              className={`inline-block min-w-max tab flex items-center gap-2 px-6 py-4 font-bold text-lg border-b-4 transition-all duration-200 ${activeTab === idx ? "text-purple-700 border-purple-700" : "text-stone-700 border-transparent hover:text-purple-500"}`}
+              className={`inline-block min-w-max tab flex items-center gap-2 px-4 py-3 font-bold text-base border-b-4 transition-all duration-200 ${activeTab === idx ? "text-purple-700 border-purple-700" : "text-stone-700 border-transparent hover:text-purple-500"}`}
               onClick={() => setActiveTab(idx)}
             >
-              <tab.icon className="w-6 h-6" />
+              <tab.icon className="w-5 h-5" />
               {tab.label}
             </button>
           ))}
@@ -96,11 +96,11 @@ export default function ModelSection() {
                 style={{ width: `calc(100% / ${tabCount})` }}
                 aria-hidden={activeTab !== idx}
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                   {tab.content.map((item) => (
-                    <div key={item.title} className="card bg-white p-6 rounded-xl shadow hover:shadow-lg transition-transform">
-                      <h4 className="font-bold text-lg text-purple-700 mb-3">{item.title}</h4>
-                      <p className="text-stone-600">{item.text}</p>
+                    <div key={item.title} className="card bg-white p-4 sm:p-6 rounded-xl shadow hover:shadow-lg transition-transform">
+                      <h4 className="font-bold text-base sm:text-lg text-purple-700 mb-2 sm:mb-3">{item.title}</h4>
+                      <p className="text-stone-600 text-sm sm:text-base">{item.text}</p>
                     </div>
                   ))}
                 </div>

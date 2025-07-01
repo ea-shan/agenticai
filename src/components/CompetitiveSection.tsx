@@ -32,18 +32,18 @@ const competitors = [
 export default function CompetitiveSection() {
   const { openModal } = useLLMModal();
   return (
-    <section id="competitive" className="py-20 bg-white">
+    <section id="competitive" className="py-10 md:py-20 px-2 sm:px-4 bg-white w-full overflow-x-hidden">
       <h2 className="text-3xl md:text-4xl font-bold text-center section-title mb-4 text-black">Competitive Landscape</h2>
-      <p className="text-lg text-stone-600 text-center max-w-3xl mx-auto mb-12">We&apos;ve analyzed leading AI marketing platforms and specialized tools. While many automate parts, our solution aims for true, end-to-end agentic autonomy. Click &quot;Generate Insight ✨&quot; for an AI-powered overview of each competitor.</p>
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <p className="text-base sm:text-lg text-stone-600 text-center max-w-3xl mx-auto mb-12 px-2">We&apos;ve analyzed leading AI marketing platforms and specialized tools. While many automate parts, our solution aims for true, end-to-end agentic autonomy. Click &quot;Generate Insight ✨&quot; for an AI-powered overview of each competitor.</p>
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
         {competitors.map((c) => (
-          <div key={c.name} className="card bg-white p-6 rounded-xl shadow flex flex-col justify-between hover:shadow-lg transition-transform">
+          <div key={c.name} className="card bg-white p-4 sm:p-6 rounded-xl shadow flex flex-col justify-between hover:shadow-lg transition-transform">
             <div>
-              <h3 className="font-bold text-xl text-purple-700 mb-2 text-black">{c.name}</h3>
-              <p className="text-sm text-stone-600">{c.focus}</p>
+              <h3 className="font-bold text-lg sm:text-xl text-purple-700 mb-2 text-black">{c.name}</h3>
+              <p className="text-xs sm:text-sm text-stone-600">{c.focus}</p>
             </div>
             <button
-              className="mt-4 w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 flex items-center justify-center gap-2"
+              className="mt-4 w-full bg-purple-600 text-white py-2 px-4 rounded-md hover:bg-purple-700 flex items-center justify-center gap-2 text-sm sm:text-base"
               onClick={() => openModal({
                 title: `Insight: ${c.name}`,
                 prompt: `Provide a concise, 2-3 sentence strategic insight about ${c.name} in the context of agentic AI marketing solutions, highlighting their strengths or a key differentiator.`
@@ -54,7 +54,7 @@ export default function CompetitiveSection() {
           </div>
         ))}
       </div>
-      <p className="text-lg text-stone-600 max-w-3xl mx-auto mt-8">While these tools offer significant automation, our vision is a solution that fully integrates the &apos;observe, plan, act, reflect&apos; loop for true self-optimization, going beyond siloed functionalities.</p>
+      <p className="text-base sm:text-lg text-stone-600 max-w-3xl mx-auto mt-8 px-2">While these tools offer significant automation, our vision is a solution that fully integrates the &apos;observe, plan, act, reflect&apos; loop for true self-optimization, going beyond siloed functionalities.</p>
     </section>
   );
 }

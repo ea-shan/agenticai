@@ -41,24 +41,24 @@ export default function InvestmentSection() {
   };
 
   return (
-    <section id="investment" className="py-20 text-center bg-white">
+    <section id="investment" className="py-10 md:py-20 px-2 sm:px-4 text-center bg-white w-full overflow-x-hidden">
       <h2 className="text-3xl md:text-4xl font-bold section-title mb-4 text-black">Why Invest In Us?</h2>
-      <p className="text-lg text-stone-600 text-center max-w-3xl mx-auto mb-12">Our agentic AI solution represents the future of marketing, delivering unparalleled efficiency and growth. Click &quot;Draft Pitch Summary &quot; for an AI-generated concise overview of our value proposition.</p>
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 my-12">
+      <p className="text-base sm:text-lg text-stone-600 text-center max-w-3xl mx-auto mb-12 px-2">Our agentic AI solution represents the future of marketing, delivering unparalleled efficiency and growth. Click &quot;Draft Pitch Summary &quot; for an AI-generated concise overview of our value proposition.</p>
+      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 my-10 md:my-12">
         {cards.map((c) => (
-          <div key={c.title} className="card bg-white p-6 rounded-xl shadow flex flex-col items-center hover:shadow-lg transition-transform">
-            <c.icon className="w-10 h-10 text-purple-600 mb-2" />
-            <h3 className="font-bold text-lg mb-2 text-black">{c.title}</h3>
-            <p className="text-stone-600">{c.desc}</p>
+          <div key={c.title} className="card bg-white p-4 sm:p-6 rounded-xl shadow flex flex-col items-center hover:shadow-lg transition-transform">
+            <c.icon className="w-8 h-8 sm:w-10 sm:h-10 text-purple-600 mb-2" />
+            <h3 className="font-bold text-base sm:text-lg mb-2 text-black">{c.title}</h3>
+            <p className="text-stone-600 text-sm sm:text-base">{c.desc}</p>
           </div>
         ))}
       </div>
-      <div className="bg-white p-8 rounded-lg shadow-lg inline-block">
-        <p className="text-lg text-stone-600">Seeking</p>
-        <p className="text-4xl font-bold text-purple-700 my-2">[X Amount]</p>
-        <p className="text-lg text-stone-600">in Seed Funding to develop and refine the Agentic AI Prototype.</p>
+      <div className="bg-white p-4 sm:p-8 rounded-lg shadow-lg inline-block">
+        <p className="text-base sm:text-lg text-stone-600">Seeking</p>
+        <p className="text-2xl sm:text-4xl font-bold text-purple-700 my-2">[X Amount]</p>
+        <p className="text-base sm:text-lg text-stone-600">in Seed Funding to develop and refine the Agentic AI Prototype.</p>
         <button
-          className="mt-6 bg-purple-600 text-white py-2 px-6 rounded-md hover:bg-purple-700 flex items-center gap-2"
+          className="mt-6 bg-purple-600 text-white py-2 px-6 rounded-md hover:bg-purple-700 flex items-center gap-2 text-sm sm:text-base"
           onClick={handleDraftSummary}
         >
           <SparklesIcon className="w-5 h-5" /> Draft Pitch Summary

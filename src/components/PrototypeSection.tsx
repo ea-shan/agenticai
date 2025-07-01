@@ -29,21 +29,21 @@ export default function PrototypeSection() {
   const [months, setMonths] = useState(4);
   const [pm, setPm] = useState(false);
   return (
-    <section id="prototype" className="py-20 bg-white">
+    <section id="prototype" className="py-10 md:py-20 px-2 sm:px-4 bg-white w-full overflow-x-hidden">
       <h2 className="text-3xl md:text-4xl font-bold text-center section-title mb-4 text-black">Prototype Plan & Costs</h2>
-      <p className="text-lg text-black text-center max-w-3xl mx-auto mb-12">Our high-feasibility plan leverages our existing strengths to deliver a working prototype in 4-6 months. Explore the development timeline and interact with the cost model below, seeing how we&apos;ll demonstrate the core agentic loop. Click &quot;Explain Phase ✨&quot; for an AI-powered deep dive into each stage.</p>
-      <div className="my-16">
+      <p className="text-base sm:text-lg text-black text-center max-w-3xl mx-auto mb-12 px-2">Our high-feasibility plan leverages our existing strengths to deliver a working prototype in 4-6 months. Explore the development timeline and interact with the cost model below, seeing how we&apos;ll demonstrate the core agentic loop. Click &quot;Explain Phase ✨&quot; for an AI-powered deep dive into each stage.</p>
+      <div className="my-10 md:my-16">
         <h3 className="text-2xl font-bold text-center mb-8 text-black">Development Timeline</h3>
-        <div className="relative max-w-4xl mx-auto border-l-2 border-purple-300 pl-8 py-4">
+        <div className="relative max-w-4xl mx-auto border-l-2 border-purple-300 pl-4 sm:pl-8 py-4">
           {phases.map((phase) => (
-            <div key={phase.title} className="timeline-item mb-12 relative pr-4">
-              <h4 className="font-bold text-xl text-black">{phase.title}</h4>
-              <p className="font-medium text-black">Months: {phase.months}</p>
-              <ul className="list-disc list-inside text-black mt-2">
+            <div key={phase.title} className="timeline-item mb-8 sm:mb-12 relative pr-2 sm:pr-4">
+              <h4 className="font-bold text-lg sm:text-xl text-black">{phase.title}</h4>
+              <p className="font-medium text-black text-sm sm:text-base">Months: {phase.months}</p>
+              <ul className="list-disc list-inside text-black mt-2 text-sm sm:text-base">
                 <li>{phase.details}</li>
               </ul>
               <button
-                className="mt-4 bg-purple-600 text-white py-1 px-3 rounded-md hover:bg-purple-700 flex items-center gap-2 text-black"
+                className="mt-4 bg-purple-600 text-white py-1 px-3 rounded-md hover:bg-purple-700 flex items-center gap-2 text-sm sm:text-base"
                 onClick={() => openModal({
                   title: `Deep Dive: ${phase.title}`,
                   prompt: `Explain the following prototype phase in more detail, focusing on its significance and expected outcomes for an agentic AI marketing solution: &quot;${phase.title}. ${phase.details}&quot;.`
@@ -55,9 +55,9 @@ export default function PrototypeSection() {
           ))}
         </div>
       </div>
-      <div className="card bg-white p-8 mt-16 rounded-xl shadow">
+      <div className="card bg-white p-4 sm:p-8 mt-10 md:mt-16 rounded-xl shadow">
         <h3 className="text-2xl font-bold text-center mb-8 text-black">Interactive Cost Estimator</h3>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 items-center">
           <div className="lg:col-span-2">
             <Chart months={months} pm={pm} />
           </div>

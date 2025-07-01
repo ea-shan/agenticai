@@ -54,7 +54,7 @@ export default function VisionSection() {
   };
 
   return (
-    <section id="vision" className="text-center min-h-[80vh] flex flex-col justify-center items-center py-16 bg-white w-full">
+    <section id="vision" className="text-center min-h-[80vh] flex flex-col justify-center items-center py-10 md:py-16 bg-white w-full overflow-x-hidden">
       <div className="absolute inset-0 -z-10">
         <Image
           src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=1200&q=80"
@@ -64,15 +64,19 @@ export default function VisionSection() {
           priority
         />
       </div>
-      <h2 className="text-4xl md:text-6xl font-bold text-center section-title mb-4 text-black drop-shadow-lg">Unleashing Autonomous Growth</h2>
-      <p className="text-lg md:text-xl text-stone-600 max-w-3xl mx-auto mb-12 drop-shadow">We are building an intelligent, autonomous system that moves beyond simple automation to deliver adaptive learning, proactive decision-making, and self-optimization for prospect acquisition.</p>
-      <div className="relative flex flex-col items-center justify-center w-[340px] h-[340px] md:w-[420px] md:h-[420px] mx-auto">
+      <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-center section-title mb-4 text-black drop-shadow-lg px-2">
+        Unleashing Autonomous Growth
+      </h2>
+      <p className="text-base sm:text-lg md:text-xl text-stone-600 max-w-3xl mx-auto mb-12 drop-shadow px-2">
+        We are building an intelligent, autonomous system that moves beyond simple automation to deliver adaptive learning, proactive decision-making, and self-optimization for prospect acquisition.
+      </p>
+      <div className="relative flex flex-col items-center justify-center w-[90vw] max-w-xs sm:max-w-md md:w-[420px] md:h-[420px] h-[340px] md:max-w-none mx-auto">
         {/* Concentric animated circles (rotating, pause on hover) */}
         <div
           className={`absolute inset-0 flex items-center justify-center z-0 pointer-events-none ${paused ? '' : 'animate-spin-slow'}`}
         >
-          <span className="block w-[320px] h-[320px] md:w-[400px] md:h-[400px] rounded-full border-4 border-purple-200 animate-pulse-slow" />
-          <span className="block absolute w-[220px] h-[220px] md:w-[300px] md:h-[300px] rounded-full border-2 border-purple-100 animate-pulse-slower" />
+          <span className="block w-[80vw] max-w-[320px] h-[80vw] max-h-[320px] md:w-[400px] md:h-[400px] rounded-full border-4 border-purple-200 animate-pulse-slow" />
+          <span className="block absolute w-[55vw] max-w-[220px] h-[55vw] max-h-[220px] md:w-[300px] md:h-[300px] rounded-full border-2 border-purple-100 animate-pulse-slower" />
         </div>
         {/* Static icons around the circle */}
         <div className="absolute inset-0 flex items-center justify-center z-10">
@@ -83,16 +87,16 @@ export default function VisionSection() {
               onMouseEnter={() => handleMouseEnter(idx)}
               onMouseLeave={handleMouseLeave}
             >
-              <item.icon className="w-12 h-12 text-purple-500 mb-2" />
+              <item.icon className="w-10 h-10 sm:w-12 sm:h-12 text-purple-500 mb-2" />
               <span
-                className="font-bold text-black underline underline-offset-4 cursor-pointer"
+                className="font-bold text-black underline underline-offset-4 cursor-pointer text-sm sm:text-base"
                 tabIndex={0}
               >
                 {item.label}
               </span>
               {/* Tooltip on hover or auto */}
               {tooltipIdx === idx && (
-                <div className="absolute left-1/2 -translate-x-1/2 mt-16 md:mt-20 bg-white border border-purple-200 shadow-lg rounded-lg px-4 py-2 text-sm text-black z-30 whitespace-nowrap animate-fade-in">
+                <div className="absolute left-1/2 -translate-x-1/2 mt-12 sm:mt-16 md:mt-20 bg-white border border-purple-200 shadow-lg rounded-lg px-3 py-2 text-xs sm:text-sm text-black z-30 whitespace-nowrap animate-fade-in">
                   {item.tooltip}
                 </div>
               )}
@@ -101,7 +105,9 @@ export default function VisionSection() {
         </div>
         {/* Agent circle in center */}
         <div className="relative z-20 flex items-center justify-center">
-          <div className="w-28 h-28 md:w-36 md:h-36 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-2xl md:text-3xl shadow-lg animate-pulse">Agent</div>
+          <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg sm:text-2xl md:text-3xl shadow-lg animate-pulse">
+            Agent
+          </div>
         </div>
       </div>
     </section>
