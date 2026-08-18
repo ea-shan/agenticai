@@ -16,7 +16,7 @@ function LogoMark() {
   return (
     <span className="flex h-11 items-center overflow-visible">
       <Image
-        src="/EA_logo.svg"
+        src="/EA_logo.webp"
         alt="Express Analytics"
         width={1080}
         height={420}
