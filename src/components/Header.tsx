@@ -12,16 +12,17 @@ const navLinks = [
   { href: "#investment", label: "Investment", icon: CurrencyDollarIcon },
 ];
 
-function LogoMark({ compact = false }: { compact?: boolean }) {
+function LogoMark() {
   return (
-    <span className="logo-island flex items-center rounded-xl px-2.5 py-1.5 ring-1 ring-white/10">
+    <span className="flex h-11 items-center overflow-visible">
       <Image
         src="/EA_logo.svg"
         alt="Express Analytics"
-        width={compact ? 168 : 200}
-        height={compact ? 36 : 44}
+        width={1080}
+        height={420}
         priority
-        className={compact ? "h-8 w-auto" : "h-9 w-auto sm:h-10"}
+        unoptimized
+        className="h-11 w-auto max-w-none object-contain object-left"
       />
     </span>
   );
@@ -32,11 +33,8 @@ export default function Header() {
   return (
     <nav className="fixed top-4 left-4 right-4 z-50 mx-auto max-w-7xl rounded-2xl border border-stone-200/80 bg-white/80 px-3 py-2 shadow-[0_20px_40px_-18px_rgba(28,25,23,0.16)] backdrop-blur-xl sm:px-4">
       <div className="flex items-center justify-between gap-3">
-        <a href="#vision" className="flex min-w-0 items-center gap-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
+        <a href="#vision" className="flex h-11 min-w-0 items-center rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
           <LogoMark />
-          <span className="hidden truncate font-heading text-sm font-semibold tracking-tight text-stone-800 xl:inline">
-            Agentic AI Marketing
-          </span>
         </a>
         <div className="hidden items-center gap-1 lg:flex">
           {navLinks.map((link) => (
@@ -66,7 +64,7 @@ export default function Header() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-8 flex items-center justify-between">
-              <LogoMark compact />
+              <LogoMark />
               <button
                 className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-violet-600"
                 onClick={() => setMenuOpen(false)}

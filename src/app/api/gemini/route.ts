@@ -27,7 +27,7 @@ function messageText(message: unknown): string {
 }
 
 function cleanText(raw: string) {
-  let text = raw.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
+  const text = raw.replace(/<think>[\s\S]*?<\/think>/gi, '').trim();
   if (/^(?:here's a thinking process:|thinking process:|reasoning:)/i.test(text)) {
     const labeled = text.match(/(?:\*\*(?:Positioning|The ask|Strength|Gap)\*\*|(?:^|\n)(?:Positioning|The ask|Strength|Gap)\s*[:—-])[\s\S]+$/i);
     if (labeled) return labeled[0].trim();

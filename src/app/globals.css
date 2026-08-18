@@ -26,10 +26,6 @@ body {
   font-family: var(--font-heading);
 }
 
-.logo-island {
-  box-shadow: inset 0 -2px 0 var(--color-brand-red);
-}
-
 .hero-mesh {
   background:
     radial-gradient(ellipse 90% 65% at 6% 12%, rgba(167, 139, 250, 0.48), transparent 58%),
