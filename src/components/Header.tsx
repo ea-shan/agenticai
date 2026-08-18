@@ -12,53 +12,78 @@ const navLinks = [
   { href: "#investment", label: "Investment", icon: CurrencyDollarIcon },
 ];
 
+function LogoMark({ compact = false }: { compact?: boolean }) {
+  return (
+    <span className="logo-island flex items-center rounded-xl px-2.5 py-1.5 ring-1 ring-white/10">
+      <Image
+        src="/EA_logo.svg"
+        alt="Express Analytics"
+        width={compact ? 168 : 200}
+        height={compact ? 36 : 44}
+        priority
+        className={compact ? "h-8 w-auto" : "h-9 w-auto sm:h-10"}
+      />
+    </span>
+  );
+}
+
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <nav className="w-full px-2 sm:px-4 md:px-6 py-3 md:py-4 flex justify-between items-center bg-white shadow-sm sticky top-0 z-40">
-      <a href="#vision" className="flex items-center gap-2 min-w-0">
-        <Image src="/ea-logo-horizontal-dark.webp" alt="Express Analytics Logo" width={220} height={48} priority className="w-auto h-10 sm:h-12 md:h-14 lg:h-10 xl:h-12" />
-        <span className="ml-2 text-xl font-bold text-black whitespace-nowrap hidden [@media(min-width:1100px)]:inline-block truncate max-w-xs lg:max-w-none">Agentic AI Marketing</span>
-      </a>
-      <div className="hidden md:flex space-x-4 lg:space-x-8">
-        {navLinks.map(link => (
-          <a key={link.href} href={link.href} className="nav-link font-medium pb-1 text-black hover:text-purple-700 flex items-center gap-2">
-            <link.icon className="w-5 h-5" />
-            {link.label}
-          </a>
-        ))}
+    <nav className="fixed top-4 left-4 right-4 z-50 mx-auto max-w-7xl rounded-2xl border border-stone-200/80 bg-white/80 px-3 py-2 shadow-[0_20px_40px_-18px_rgba(28,25,23,0.16)] backdrop-blur-xl sm:px-4">
+      <div className="flex items-center justify-between gap-3">
+        <a href="#vision" className="flex min-w-0 items-center gap-3 rounded-xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600">
+          <LogoMark />
+          <span className="hidden truncate font-heading text-sm font-semibold tracking-tight text-stone-800 xl:inline">
+            Agentic AI Marketing
+          </span>
+        </a>
+        <div className="hidden items-center gap-1 lg:flex">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="inline-flex min-h-11 cursor-pointer items-center gap-1.5 rounded-full px-3 text-sm font-medium text-stone-700 transition-colors duration-200 hover:bg-violet-50 hover:text-violet-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-violet-600"
+            >
+              <link.icon className="h-4 w-4" />
+              {link.label}
+            </a>
+          ))}
+        </div>
+        <button
+          className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-stone-800 focus-visible:outline focus-visible:outline-2 focus-visible:outline-violet-600 lg:hidden"
+          onClick={() => setMenuOpen(true)}
+          aria-label="Open menu"
+        >
+          <Bars3Icon className="h-7 w-7" />
+        </button>
       </div>
-      <button
-        className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
-        onClick={() => setMenuOpen(true)}
-        aria-label="Open menu"
-      >
-        <Bars3Icon className="w-8 h-8 text-black" />
-      </button>
+
       {menuOpen && (
-        <div className="fixed inset-0 z-50 flex justify-start bg-black/30" onClick={() => setMenuOpen(false)}>
-          <div className="w-72 max-w-full bg-white h-full shadow-lg p-6 flex flex-col" onClick={e => e.stopPropagation()}>
-            <div className="flex items-center justify-between mb-8">
-              <div className="flex items-center gap-2 min-w-0">
-                <Image src="/ea-logo-horizontal-dark.webp" alt="Express Analytics Logo" width={180} height={40} priority className="w-auto h-10 sm:h-12 md:h-14 lg:h-8 xl:h-10" />
-              </div>
+        <div className="fixed inset-0 z-50 bg-stone-900/30" onClick={() => setMenuOpen(false)}>
+          <div
+            className="flex h-full w-72 max-w-full flex-col bg-white p-5 shadow-[0_24px_60px_-20px_rgba(28,25,23,0.35)]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-8 flex items-center justify-between">
+              <LogoMark compact />
               <button
-                className="p-2 rounded focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-violet-600"
                 onClick={() => setMenuOpen(false)}
                 aria-label="Close menu"
               >
-                <XMarkIcon className="w-8 h-8 text-black" />
+                <XMarkIcon className="h-7 w-7 text-stone-800" />
               </button>
             </div>
-            <nav className="flex flex-col gap-4 mt-2">
-              {navLinks.map(link => (
+            <nav className="flex flex-col gap-1">
+              {navLinks.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
-                  className="flex items-center gap-3 text-lg font-medium text-black hover:text-purple-700 py-2 px-2 rounded transition-colors"
+                  className="flex min-h-11 cursor-pointer items-center gap-3 rounded-xl px-3 text-base font-medium text-stone-800 hover:bg-violet-50 hover:text-violet-800"
                   onClick={() => setMenuOpen(false)}
                 >
-                  <link.icon className="w-6 h-6" />
+                  <link.icon className="h-5 w-5" />
                   {link.label}
                 </a>
               ))}

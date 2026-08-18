@@ -1,116 +1,160 @@
 'use client';
-import { useState, useRef } from "react";
-import { CircleStackIcon } from '@heroicons/react/24/outline';
-import { AcademicCapIcon as BrainIcon } from '@heroicons/react/24/outline';
-import { CursorArrowRaysIcon } from '@heroicons/react/24/outline';
-import { ChartBarIcon } from '@heroicons/react/24/outline';
+
+import { KeyboardEvent, useState } from 'react';
+import { CircleStackIcon, AcademicCapIcon, CursorArrowRaysIcon, ChartBarIcon } from '@heroicons/react/24/outline';
 
 const tabData = [
   {
-    label: "Data Ingestion & Unification",
+    short: 'Unify',
+    stage: 'Observe',
+    label: 'Data Ingestion & Unification',
     icon: CircleStackIcon,
+    summary: 'One prospect graph instead of four dashboards.',
     content: [
-      { title: "Objective", text: "Collect and centralize all relevant prospect data into a single, unified source for comprehensive analysis." },
-      { title: "Sources", text: "HubSpot, Google Ads, GA4, Apollo.io, SemRush, first-party & Google Platform data." },
-      { title: "Tools", text: "Google Cloud Storage / BigQuery, GTM / GA4 Measurement Protocol, custom ETL scripts/connectors." },
+      { title: 'Objective', text: 'Collect and centralize prospect data into a single, analysis-ready source.' },
+      { title: 'Sources', text: 'HubSpot, Google Ads, GA4, Apollo.io, SemRush, first-party and Google Platform data.' },
+      { title: 'Tools', text: 'BigQuery, Cloud Storage, GTM / GA4 Measurement Protocol, custom ETL connectors.' },
     ],
   },
   {
-    label: "Prospect Identification (The Brain)",
-    icon: BrainIcon,
+    short: 'Decide',
+    stage: 'Plan',
+    label: 'Prospect Identification',
+    icon: AcademicCapIcon,
+    summary: 'The brain that names who to pursue next.',
     content: [
-      { title: "Objective", text: "Understand who ideal prospects are, proactively identify new ones, and segment them based on their likelihood to convert." },
-      { title: "Processes", text: "Feature Engineering, Predictive Modeling (Look-alike, Propensity Scoring), Next Best Action Recommendation." },
-      { title: "Tools", text: "Python ML, Vertex AI, BigQuery ML." },
+      { title: 'Objective', text: 'Identify ideal prospects, find look-alikes, and rank them by likelihood to convert.' },
+      { title: 'Processes', text: 'Feature engineering, propensity scoring, look-alike modeling, next-best-action.' },
+      { title: 'Tools', text: 'Python ML, Vertex AI, BigQuery ML.' },
     ],
   },
   {
-    label: "Intelligent Targeting & Activation",
+    short: 'Activate',
+    stage: 'Act',
+    label: 'Targeting & Activation',
     icon: CursorArrowRaysIcon,
+    summary: 'Decisions leave the notebook and hit the media APIs.',
     content: [
-      { title: "Objective", text: "Reach identified prospects with highly personalized messages and offers across the Google Marketing Platform." },
-      { title: "Processes", text: "Audience Activation, Automated Bid Management, Dynamic Creative Optimization, Cross-Channel Orchestration." },
-      { title: "Tools", text: "Google Ads API, DV360 API, GA4 audience linking." },
+      { title: 'Objective', text: 'Reach scored prospects with personalized offers across Google Marketing Platform.' },
+      { title: 'Processes', text: 'Audience activation, automated bids, dynamic creative, cross-channel orchestration.' },
+      { title: 'Tools', text: 'Google Ads API, DV360 API, GA4 audience linking.' },
     ],
   },
   {
-    label: "Performance Monitoring & Reflection",
+    short: 'Learn',
+    stage: 'Reflect',
+    label: 'Monitoring & Reflection',
     icon: ChartBarIcon,
+    summary: 'Outcomes write the next plan. The loop closes.',
     content: [
-      { title: "Objective", text: "Continuously measure the impact of actions, evaluate performance against goals, and feed insights back for ongoing optimization and learning." },
-      { title: "Processes", text: "Real-time Tracking of KPIs, Attribution Modeling, Reinforcement Learning, Anomaly Detection." },
-      { title: "Tools", text: "GA4, Looker Studio, BigQuery, Cloud Functions / Cloud Run." },
+      { title: 'Objective', text: 'Measure impact against goals and feed results back into scoring and spend.' },
+      { title: 'Processes', text: 'KPI tracking, attribution, reinforcement learning, anomaly detection.' },
+      { title: 'Tools', text: 'GA4, Looker Studio, BigQuery, Cloud Functions / Cloud Run.' },
     ],
   },
 ];
 
 export default function ModelSection() {
   const [activeTab, setActiveTab] = useState(0);
-  const tabCount = tabData.length;
-  const contentRef = useRef<HTMLDivElement>(null);
+  const tab = tabData[activeTab];
+  const featured = tab.content[0];
+  const rest = tab.content.slice(1);
+
+  const onTabKey = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      event.preventDefault();
+      setActiveTab((i) => (i + 1) % tabData.length);
+    }
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      event.preventDefault();
+      setActiveTab((i) => (i - 1 + tabData.length) % tabData.length);
+    }
+    if (event.key === 'Home') {
+      event.preventDefault();
+      setActiveTab(0);
+    }
+    if (event.key === 'End') {
+      event.preventDefault();
+      setActiveTab(tabData.length - 1);
+    }
+  };
+
   return (
-    <section id="model" className="py-10 md:py-20 px-2 sm:px-4 bg-white w-full overflow-x-hidden">
-      <h2 className="text-3xl md:text-4xl font-bold text-center section-title mb-4 text-black">The Agentic Model: Deep Dive</h2>
-      <p className="text-base sm:text-lg text-stone-600 text-center max-w-3xl mx-auto mb-12 px-2">Our model is comprised of four interconnected components that form a continuous loop of learning and optimization. Explore each component to understand its detailed role and the technologies involved.</p>
-      <div className="max-w-5xl mx-auto">
-        {/* Mobile: horizontally scrollable tabs */}
-        <div className="overflow-x-auto whitespace-nowrap -mx-2 px-2 border-b border-stone-300 mb-8 scrollbar-hide md:hidden">
-          {tabData.map((tab, idx) => (
-            <button
-              key={tab.label}
-              className={`inline-block min-w-max tab flex items-center gap-2 px-4 py-3 font-bold text-base border-b-4 transition-all duration-200 ${activeTab === idx ? "text-purple-700 border-purple-700" : "text-stone-700 border-transparent hover:text-purple-500"}`}
-              onClick={() => setActiveTab(idx)}
-            >
-              <tab.icon className="w-5 h-5" />
-              {tab.label}
-            </button>
-          ))}
+    <section id="model" className="w-full scroll-mt-28 overflow-x-hidden bg-stone-50 px-4 py-16 sm:px-6 md:py-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="max-w-2xl">
+          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-violet-700">The loop, in systems</p>
+          <h2 className="mt-3 font-heading text-3xl font-semibold tracking-tight text-stone-900 md:text-5xl">
+            The Agentic Model: Deep Dive
+          </h2>
+          <p className="mt-4 max-w-[65ch] text-base leading-relaxed text-stone-600 sm:text-lg">
+            Four components, one closed circuit. Each stage names the job, the process, and the stack that already sits in-house.
+          </p>
         </div>
-        {/* Desktop: regular flex row tabs */}
-        <div className="hidden md:flex justify-center border-b border-stone-300 mb-8">
-          {tabData.map((tab, idx) => (
-            <button
-              key={tab.label}
-              className={`tab flex items-center gap-2 px-6 py-4 font-bold text-lg border-b-4 transition-all duration-200 ${activeTab === idx ? "text-purple-700 border-purple-700" : "text-stone-700 border-transparent hover:text-purple-500"}`}
-              onClick={() => setActiveTab(idx)}
-            >
-              <tab.icon className="w-6 h-6" />
-              {tab.label}
-            </button>
-          ))}
-        </div>
-        {/* Sliding tab content */}
-        <div className="relative w-full overflow-hidden" style={{ minHeight: 220 }}>
+
+        <div className="mt-12 grid items-start gap-8 lg:grid-cols-[minmax(0,280px)_minmax(0,1fr)]">
           <div
-            ref={contentRef}
-            className="flex transition-transform duration-500"
-            style={{
-              width: `${tabCount * 100}%`,
-              transform: `translateX(-${activeTab * (100 / tabCount)}%)`,
-            }}
+            role="tablist"
+            aria-label="Agentic model stages"
+            onKeyDown={onTabKey}
+            className="flex gap-2 overflow-x-auto pb-1 lg:flex-col lg:overflow-visible"
           >
-            {tabData.map((tab, idx) => (
-              <div
-                key={tab.label}
-                className="w-full flex-shrink-0 px-1"
-                style={{ width: `calc(100% / ${tabCount})` }}
-                aria-hidden={activeTab !== idx}
-              >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                  {tab.content.map((item) => (
-                    <div key={item.title} className="card bg-white p-4 sm:p-6 rounded-xl shadow hover:shadow-lg transition-transform">
-                      <h4 className="font-bold text-base sm:text-lg text-purple-700 mb-2 sm:mb-3">{item.title}</h4>
-                      <p className="text-stone-600 text-sm sm:text-base">{item.text}</p>
-                    </div>
-                  ))}
-                </div>
+            {tabData.map((item, idx) => {
+              const on = activeTab === idx;
+              return (
+                <button
+                  key={item.label}
+                  type="button"
+                  role="tab"
+                  id={`model-tab-${idx}`}
+                  aria-selected={on}
+                  aria-controls={`model-panel-${idx}`}
+                  tabIndex={on ? 0 : -1}
+                  onClick={() => setActiveTab(idx)}
+                  className={`min-h-11 min-w-[11rem] cursor-pointer rounded-2xl border px-4 py-3 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600 lg:min-w-0 ${on ? 'border-violet-300 bg-white text-stone-900 shadow-[0_16px_32px_-20px_rgba(28,25,23,0.25)]' : 'border-transparent bg-transparent text-stone-600 hover:bg-white/70'}`}
+                >
+                  <span className="flex items-center gap-3">
+                    <span className={`font-mono text-xs ${on ? 'text-violet-700' : 'text-stone-400'}`}>0{idx + 1}</span>
+                    <item.icon className={`h-5 w-5 ${on ? 'text-violet-700' : 'text-stone-400'}`} />
+                    <span className="text-sm font-semibold">{item.short}</span>
+                    <span className="ml-auto hidden text-[10px] uppercase tracking-[0.16em] text-violet-600 lg:inline">{item.stage}</span>
+                  </span>
+                  <span className="mt-1 hidden text-xs leading-relaxed text-stone-500 lg:block">{item.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          <div
+            role="tabpanel"
+            id={`model-panel-${activeTab}`}
+            aria-labelledby={`model-tab-${activeTab}`}
+            className="rounded-[1.6rem] border border-stone-200/80 bg-white p-2"
+          >
+            <div className="rounded-[1.25rem] bg-stone-50 p-5 sm:p-8">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-violet-700">
+                {tab.stage} · 0{activeTab + 1}
+              </p>
+              <h3 className="mt-2 font-heading text-2xl font-semibold tracking-tight text-stone-900 sm:text-3xl">{tab.label}</h3>
+              <p className="mt-2 text-base text-stone-600">{tab.summary}</p>
+
+              <article className="mt-6 rounded-2xl bg-white p-5 sm:p-6">
+                <h4 className="text-sm font-semibold uppercase tracking-[0.14em] text-violet-700">{featured.title}</h4>
+                <p className="mt-2 text-lg leading-relaxed text-stone-800">{featured.text}</p>
+              </article>
+
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                {rest.map((item) => (
+                  <article key={item.title} className="rounded-2xl bg-white p-5">
+                    <h4 className="text-sm font-semibold text-stone-900">{item.title}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-stone-600">{item.text}</p>
+                  </article>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 }
-
-

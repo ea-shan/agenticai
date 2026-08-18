@@ -1,62 +1,75 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fafaf9;
+  --foreground: #1c1917;
+  --color-primary: #6d28d9;
+  --color-brand-red: #e31b23;
+  --color-ink: #1c1917;
+  --ease: cubic-bezier(0.32, 0.72, 0, 1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-work), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.font-heading {
+  font-family: var(--font-heading);
+}
 
-@layer utilities {
-  .animate-spin-slow {
-    animation: spin 12s linear infinite;
+.logo-island {
+  box-shadow: inset 0 -2px 0 var(--color-brand-red);
+}
+
+.hero-mesh {
+  background:
+    radial-gradient(ellipse 90% 65% at 6% 12%, rgba(167, 139, 250, 0.48), transparent 58%),
+    radial-gradient(ellipse 60% 50% at 94% 8%, rgba(227, 27, 35, 0.12), transparent 50%),
+    radial-gradient(ellipse 70% 60% at 82% 92%, rgba(196, 181, 253, 0.55), transparent 56%),
+    radial-gradient(ellipse 45% 40% at 48% 48%, rgba(255, 255, 255, 0.35), transparent 60%),
+    linear-gradient(180deg, #f5f3ff 0%, #fafaf9 48%, #ffffff 100%);
+  animation: mesh-drift 18s var(--ease) infinite alternate;
+  will-change: transform;
+}
+
+.hero-grain {
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.orbit-dash {
+  animation: orbit-spin 18s linear infinite;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+@keyframes mesh-drift {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
   }
-
-  .animate-pulse-slow {
-    animation: pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-
-  .animate-pulse-slower {
-    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  to {
+    transform: scale(1.05) translate3d(-1.2%, 1%, 0);
   }
 }
 
-@keyframes spin {
-  100% {
+@keyframes orbit-spin {
+  to {
     transform: rotate(360deg);
   }
 }
 
-@keyframes pulse {
-
-  0%,
-  100% {
-    opacity: 1;
-  }
-
-  50% {
-    opacity: 0.6;
+@media (prefers-reduced-motion: reduce) {
+  .hero-mesh,
+  .orbit-dash {
+    animation: none;
   }
 }
