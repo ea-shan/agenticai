@@ -14,8 +14,8 @@ const cards = [
   { icon: SparklesIcon, title: "Address Market Need", desc: "Meet growing demand for intelligent marketing solutions." },
 ];
 
-const ASK_LOW = 160000;
-const ASK_HIGH = 450000;
+const ASK_LOW = 2000000;
+const ASK_HIGH = 5000000;
 const ASK_LABEL = `$${ASK_LOW.toLocaleString()} – $${ASK_HIGH.toLocaleString()}`;
 
 const uses = [

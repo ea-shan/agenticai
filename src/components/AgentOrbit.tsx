@@ -18,10 +18,10 @@ const positions = [
 ];
 
 const tipPos = [
-  'top-full mt-2 left-1/2 -translate-x-1/2',
-  'right-full mr-2 top-1/2 -translate-y-1/2',
-  'bottom-full mb-2 left-1/2 -translate-x-1/2',
-  'left-full ml-2 top-1/2 -translate-y-1/2',
+  'bottom-full mb-3 left-1/2 -translate-x-1/2',
+  'bottom-full mb-3 right-0',
+  'top-full mt-3 left-1/2 -translate-x-1/2',
+  'bottom-full mb-3 left-0',
 ];
 
 export default function AgentOrbit() {
@@ -37,9 +37,10 @@ export default function AgentOrbit() {
 
   return (
     <div
-      className="relative mx-auto h-[340px] w-[90vw] max-w-xs sm:max-w-md md:h-[440px] md:w-[440px] md:max-w-none"
+      className="relative isolate mx-auto w-[90vw] max-w-xs py-16 sm:max-w-md md:w-[440px] md:max-w-none"
       onMouseLeave={() => setPaused(false)}
     >
+      <div className="relative h-[340px] md:h-[440px]">
       <svg className="absolute inset-0 h-full w-full pointer-events-none" viewBox="0 0 440 440" fill="none" aria-hidden>
         <circle cx="220" cy="220" r="168" className="stroke-violet-200" strokeWidth="1.5" />
         <circle cx="220" cy="220" r="118" className="stroke-violet-100" strokeWidth="1" />
@@ -62,7 +63,7 @@ export default function AgentOrbit() {
           <button
             key={stage.label}
             type="button"
-            className={`absolute ${positions[idx]} flex flex-col items-center cursor-pointer rounded-xl px-2 py-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600`}
+            className={`absolute ${positions[idx]} ${on ? 'z-20' : 'z-10'} flex flex-col items-center cursor-pointer rounded-xl px-2 py-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-600`}
             onMouseEnter={() => {
               setPaused(true);
               setActive(idx);
@@ -78,7 +79,7 @@ export default function AgentOrbit() {
             </span>
             <span className={`mt-1 text-sm font-semibold ${on ? 'text-stone-900' : 'text-stone-600'}`}>{stage.label}</span>
             {on && (
-              <span className={`absolute ${tipPos[idx]} w-44 rounded-lg border border-violet-200 bg-white px-3 py-2 text-left text-xs leading-relaxed text-stone-700 shadow-[0_12px_30px_-18px_rgba(28,25,23,0.35)] sm:w-52`}>
+              <span className={`absolute ${tipPos[idx]} z-20 w-40 rounded-lg border border-violet-200 bg-white px-3 py-2 text-left text-xs leading-relaxed text-stone-700 shadow-[0_12px_30px_-18px_rgba(28,25,23,0.35)] sm:w-48`}>
                 {stage.tip}
               </span>
             )}
@@ -86,10 +87,11 @@ export default function AgentOrbit() {
         );
       })}
 
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center">
         <div className="flex h-20 w-20 items-center justify-center rounded-full bg-violet-700 text-lg font-bold text-white shadow-[0_18px_40px_-18px_rgba(109,40,217,0.55)] sm:h-28 sm:w-28 sm:text-2xl md:h-32 md:w-32 md:text-3xl">
           Agent
         </div>
+      </div>
       </div>
     </div>
   );
